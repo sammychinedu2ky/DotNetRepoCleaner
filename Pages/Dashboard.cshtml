@@ -1,0 +1,88 @@
+﻿@page 
+@model DashboardModel 
+@{ ViewData["Title"] = "Dashboard"; }
+
+<div style="
+    height: 100%;
+    background-image: url('lib/img/pexels-photo-160107.jpeg');
+    background-size: contain;
+    background-repeat: repeat;
+  ">
+    <nav class="navbar navbar-light navbar-expand-md py-3" style="background-color: rgba(255, 255, 255, 0)">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#"><span
+                    class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"
+                    style="background-color: var(--bs-purple)"><i class="far fa-trash-alt"></i></span><span
+                    class="font-monospace fs-2 text-light">Repo Cleaner</span></a><button data-bs-toggle="collapse"
+                class="navbar-toggler" data-bs-target="#navcol-2">
+                <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-2">
+                <ul class="navbar-nav ms-auto"></ul>
+                <div style="
+            background-color: var(--bs-purple);
+            padding: 5px;
+            border-radius: 6px;
+            color: white;
+            margin-right: 5px;
+            text-align: center;
+          ">
+                    <h5>
+                        @User.Identity.Name<i class="fab fa-github" style="margin-left: 3px"></i>
+                    </h5>
+                </div>
+                <form method="post" asp-page-handler="logout">
+                     <button type="submit" class="btn btn-primary ms-md-2" role="button" href="#"
+                    style="color: var(--bs-white); background-color: var(--bs-purple)">Logout</button>
+                </form>
+               
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="background-color: rgba(57, 33, 33, 0.5); width: 100%">
+        <form method="post">
+        <div class="text-center">
+            <button class="btn btn-primary" data-bs-toggle="tooltip" data-bss-tooltip="" type="submit" style="
+          position: fixed;
+          bottom: 20px;
+          background-color: var(--bs-indigo);
+          border-radius: 31%;
+          padding: 12px;
+        " title="Delete Selected Repositories">
+                <i class="far fa-trash-alt" style="font-size: 30px; color: var(--bs-white); bottom: 20px"></i>
+            </button>
+        </div>
+        <h4 class="text-center text-light">Your Repositories</h4>
+       
+        <div class="table-responsive" style="margin-top: 2em; background-color: rgba(173, 130, 130, 0.5)">
+           
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="color: white">Repo Name</th>
+                            <th style="color: white">Selected</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                                @foreach (var (i,index) in  @Model.Repositories.Select((val,index)=>(val,index)))
+  {    
+      <tr>
+                            <td><a href="@Model.Repositories[index].Url" target="_blank"><h5 class="text-light">@Model.Repositories[index].Name</h5></a></td>
+                            <td>  <input asp-for="Repositories[index].Selected"  type="checkbox" checked ="@i.Selected"  /></td>
+                        <input asp-for="Repositories[index].Id" type="number" value="@Model.Repositories[index].Id" hidden/>
+      <input asp-for="Repositories[index].Url" type="url" value="@Model.Repositories[index].Url" hidden/>
+      <input asp-for="Repositories[index].Name" type="text" value="@Model.Repositories[index].Name" hidden/>
+                        </tr>
+     
+    
+  }
+                    
+                    </tbody>
+                </table>
+ 
+
+            </form>
+        </div>
+    </div>
+</div>
