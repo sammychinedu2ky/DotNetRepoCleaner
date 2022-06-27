@@ -14,13 +14,13 @@ builder.Configuration.AddAzureKeyVault(
        new DefaultAzureCredential());
 builder.Services.AddAuthentication(options =>
 {
-   
+
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = GitHubAuthenticationDefaults.AuthenticationScheme;
 }).AddGitHub(options =>
 {
     options.ClientId = builder.Configuration["ClientId"];
-    options.ClientSecret =  builder.Configuration["ClientSecret"];
+    options.ClientSecret = builder.Configuration["ClientSecret"];
     options.CallbackPath = GitHubAuthenticationDefaults.CallbackPath;
     options.Scope.Add("delete_repo");
     options.SaveTokens = true;
