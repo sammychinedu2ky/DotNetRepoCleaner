@@ -1,6 +1,8 @@
-﻿@page 
-@model DashboardModel 
-@{ ViewData["Title"] = "Dashboard"; }
+﻿@page
+@model DashboardModel
+@{
+    ViewData["Title"] = "Dashboard"; 
+}
 
 <div style="
     height: 100%;
@@ -28,34 +30,34 @@
             text-align: center;
           ">
                     <h5>
-                        @User.Identity.Name<i class="fab fa-github" style="margin-left: 3px"></i>
+                        @User!.Identity!.Name<i class="fab fa-github" style="margin-left: 3px"></i>
                     </h5>
                 </div>
                 <form method="post" asp-page-handler="logout">
-                     <button type="submit" class="btn btn-primary ms-md-2" role="button" href="#"
-                    style="color: var(--bs-white); background-color: var(--bs-purple)">Logout</button>
+                    <button type="submit" class="btn btn-primary ms-md-2" role="button" href="#"
+                        style="color: var(--bs-white); background-color: var(--bs-purple)">Logout</button>
                 </form>
-               
+
             </div>
         </div>
     </nav>
     <div class="container" style="background-color: rgba(57, 33, 33, 0.5); width: 100%">
         <form method="post">
-        <div class="text-center">
-            <button class="btn btn-primary" data-bs-toggle="tooltip" data-bss-tooltip="" type="submit" style="
+            <div class="text-center">
+                <button class="btn btn-primary" data-bs-toggle="tooltip" data-bss-tooltip="" type="submit" style="
           position: fixed;
           bottom: 20px;
           background-color: var(--bs-indigo);
           border-radius: 31%;
           padding: 12px;
         " title="Delete Selected Repositories">
-                <i class="far fa-trash-alt" style="font-size: 30px; color: var(--bs-white); bottom: 20px"></i>
-            </button>
-        </div>
-        <h4 class="text-center text-light">Your Repositories</h4>
-       
-        <div class="table-responsive" style="margin-top: 2em; background-color: rgba(173, 130, 130, 0.5)">
-           
+                    <i class="far fa-trash-alt" style="font-size: 30px; color: var(--bs-white); bottom: 20px"></i>
+                </button>
+            </div>
+            <h4 class="text-center text-light">Your Repositories</h4>
+
+            <div class="table-responsive" style="margin-top: 2em; background-color: rgba(173, 130, 130, 0.5)">
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -64,8 +66,7 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                                @foreach (var (i,index) in  @Model.Repositories.Select((val,index)=>(val,index)))
+         @foreach (var (i,index) in  @Model.Repositories.Select((val,index)=>(val,index)))
   {    
       <tr>
                             <td><a href="@Model.Repositories[index].Url" target="_blank"><h5 class="text-light">@Model.Repositories[index].Name</h5></a></td>
@@ -77,12 +78,11 @@
      
     
   }
-                    
                     </tbody>
                 </table>
- 
+            </div>
 
-            </form>
-        </div>
+        </form>
     </div>
+</div>
 </div>
